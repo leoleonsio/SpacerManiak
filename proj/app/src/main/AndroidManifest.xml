@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pw.spacermaniak">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+ <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:hardwareAccelerated="true"
+        android:theme="@style/AppTheme">
+        <service
+            android:name="com.here.android.mpa.service.MapService"
+            android:label="HereMapService">
+            <intent-filter>
+                <!--Note, action name should not be changed.-->
+                <action android:name="com.here.android.mpa.service.MapService.v3" />
+            </intent-filter>
+        </service>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+     <meta-data android:name="com.here.android.maps.appid" android:value="lGAUYa6mXJ3jg9Nojc5X"/>
+     <meta-data android:name="com.here.android.maps.apptoken" android:value="FJPHyxb1aoyKe_-BgZ40IA"/>
+     <meta-data android:name="com.here.android.maps.license.key" android:value="c7NetCxhFTUya7ia3B2w2lXFu6dhhS3xh4/oMrwWLrlRtgqC/MUNNyRGP4Lpyzch5LqjBpaw4fGomxbOY5YMZfJC406aBv+xnI+w6NfjidgrBNj9vKDfI6pb0CWWyElKO1TVZi9A5eVvEa0Ux7fM8eszw7A8ms9jj+gMh8QSCKVVlHDeI3q9nwwx7SshqJ4VYHPxRZANdxIjWnJyvHwJ71JiklosMH721RyMkC8vDlnaaCoT4Oekx2tXmnRCrJUFYJ9b8I8Aw/4lTf5Ugw7Sslt0sI37WV47PJRWOrDkiNTbCHz9+ibM2aAIKJZY0tr58S+wuHZNSMpPiLnrh9ITYETm/Qk2Ls8FV7CN42AfwBUp4S/8ucwJewqGLqwB7dBws1Sst/U+4mocN/7IEAUl12K7rh7vR8BKp0zGyymONzV6llMVUqFYgWom2esbR8Qhai0XwXmuImNNavHXeDYxUErpJfgHv+Pyely+vQtdG0ZAkVlsnwodS3jJDE/HV0nP1mM3s3Vo+Zy9kCgFkaiZ+EOSycCSs/R33kO2e9E+qU4kd18ddkDvly/Wmyt/Mh0wUw5h8ugN/AHY9NZxrLEXJBLtVnSnOCcjMcMhMf5ocBBIi3y20X5L1QFSdcndaBT6jikkcJ6zEHFTgkzBoOEl08qFLwNjdAK3/n0yKkW0KmE="/>
+
+ </application>
+
+</manifest>

@@ -1,0 +1,2 @@
+rootProject.name='SpacerManiak'
+include ':app'
