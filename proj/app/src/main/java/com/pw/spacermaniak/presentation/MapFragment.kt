@@ -21,6 +21,8 @@ import com.here.android.mpa.routing.RoutePlan;
 import com.here.android.mpa.routing.RouteResult;
 import com.here.android.mpa.routing.RouteWaypoint;
 import com.here.android.mpa.routing.RoutingError;
+import com.pw.spacermaniak.MainActivity
+import com.pw.spacermaniak.utilities.Toaster
 
 
 class MapFragment : Fragment() {
@@ -71,16 +73,16 @@ class MapFragment : Fragment() {
         mapFragment = childFragmentManager.findFragmentById(R.id.mapfragment) as AndroidXMapFragment?
         // Set up disk cache path for the map service for this application
 // It is recommended to use a path under your application folder for storing the disk cache
-        val success =
-            MapSettings.setIsolatedDiskCacheRootPath(
-                context?.getExternalFilesDir(null).toString() + File.separator.toString() + ".here-maps"
-            )
-        if (!success) {
-            Toast.makeText(
-                context,
-                "Unable to set isolated disk cache path.",
-                Toast.LENGTH_LONG
-            )
+        val a = activity as MainActivity
+        if (!a.configInitialized){
+            a.configInitialized =
+                MapSettings.setIsolatedDiskCacheRootPath(
+                    context?.getExternalFilesDir(null).toString() + File.separator.toString() + ".here-maps"
+                )
+        }
+
+        if (!a.configInitialized) {
+            Toaster.toast(context!!, "Unable to set isolated disk cache path.")
         } else {
             mapFragment!!.init { error ->
                 if (error == OnEngineInitListener.Error.NONE) { // retrieve a reference of the map from the map fragment

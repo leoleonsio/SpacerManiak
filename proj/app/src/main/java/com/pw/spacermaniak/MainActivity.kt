@@ -21,7 +21,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
+import com.pw.spacermaniak.presentation.MapFragment
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
@@ -30,6 +32,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var actionBarDrawerToggle : ActionBarDrawerToggle? = null
     private var toolbar : Toolbar? = null
     private var navigationView : NavigationView? = null
+    private var currentFragment: Fragment? = null
+    public var configInitialized: Boolean = false
 
     /**
      * Permissions that need to be explicitly requested from end user.
@@ -101,7 +105,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         drawerLayout?.closeDrawer(GravityCompat.START)
         when (item.itemId){
-            R.id.map -> Navigator.navigateToMap(this)
+            R.id.map -> if (this.supportFragmentManager.findFragmentById(R.id.container_fragment) !is MapFragment) Navigator.navigateToMap(this)
             R.id.search -> Navigator.navigateToSearch(this)
         }
         return true

@@ -14,7 +14,7 @@ class Toaster {
         fun toast(context: Context, msg: String){
             Toast.makeText(
                 context,
-                "Error:route results returned is not valid",
+                msg,
                 Toast.LENGTH_SHORT
             ).show()
         }
