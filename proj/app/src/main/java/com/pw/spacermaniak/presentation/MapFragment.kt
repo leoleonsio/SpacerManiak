@@ -13,23 +13,20 @@ import com.here.android.mpa.common.OnEngineInitListener
 import com.here.android.mpa.mapping.AndroidXMapFragment
 import com.here.android.mpa.mapping.Map
 import com.here.android.mpa.mapping.MapRoute
-import com.here.android.mpa.routing.*
 import com.pw.spacermaniak.R
 import java.io.File
-import com.here.android.mpa.common.GeoBoundingBox
 import com.here.android.mpa.routing.CoreRouter;
 import com.here.android.mpa.routing.RouteOptions;
 import com.here.android.mpa.routing.RoutePlan;
 import com.here.android.mpa.routing.RouteResult;
 import com.here.android.mpa.routing.RouteWaypoint;
-import com.here.android.mpa.routing.Router;
 import com.here.android.mpa.routing.RoutingError;
 
 
 class MapFragment : Fragment() {
     private var map: Map? = null
     private var mapFragment: AndroidXMapFragment? = null
-    private var m_createRouteButton: Button? = null
+    private var routeButton: Button? = null
     private var mapRoute: MapRoute? = null
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,14 +39,15 @@ class MapFragment : Fragment() {
         savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
-        initMap()
-        initCreateRouteButton()
-
+        if (map == null)
+            initMap()
+        if (routeButton == null)
+            initCreateRouteButton()
         }
 
     private fun initCreateRouteButton() {
-        m_createRouteButton = activity?.findViewById(R.id.button) as Button
-        m_createRouteButton!!.setOnClickListener(View.OnClickListener {
+        routeButton = activity?.findViewById(R.id.start_button) as Button
+        routeButton!!.setOnClickListener(View.OnClickListener {
             /*
                      * Clear map if previous results are still on map,otherwise proceed to creating
                      * route

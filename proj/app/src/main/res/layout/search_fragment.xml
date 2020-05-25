@@ -6,18 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <fragment
-        class="com.here.android.mpa.mapping.AndroidXMapFragment"
-        android:id="@+id/mapfragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
     <Button
-        android:id="@+id/start_button"
+        android:id="@+id/search_button"
         android:background="@color/beige"
         android:padding="10px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:text="@string/start_walk" />
+        android:text="@string/search_button" />
 </FrameLayout>

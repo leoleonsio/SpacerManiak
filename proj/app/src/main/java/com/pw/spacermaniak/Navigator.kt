@@ -6,6 +6,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.pw.spacermaniak.presentation.MapFragment
+import com.pw.spacermaniak.presentation.SearchFragment
 
 class Navigator {
     companion object {
@@ -18,6 +19,15 @@ class Navigator {
             )
         }
 
+        fun navigateToSearch(
+            activity: FragmentActivity?
+        ){
+            replaceFragment(
+                SearchFragment(),
+                activity
+            )
+        }
+
         private fun replaceFragment(
             fragment: Fragment,
             activity: FragmentActivity?
@@ -25,7 +35,7 @@ class Navigator {
         ) {
             activity?.supportFragmentManager?.beginTransaction()?.run {
                 setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out)
-                replace(R.id.root_container, fragment)
+                replace(R.id.container_fragment, fragment)
                 commit()
             }
         }

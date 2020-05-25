@@ -7,29 +7,29 @@ package com.pw.spacermaniak
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.here.android.mpa.mapping.AndroidXMapFragment
-import com.here.android.mpa.mapping.Map
+import androidx.core.view.GravityCompat
+import androidx.core.view.isVisible
 import java.util.*
 import kotlin.collections.ArrayList
-import com.here.android.mpa.common.OnEngineInitListener
-import com.pw.spacermaniak.R
 
-import java.io.File.separator
-
-import androidx.core.app.ComponentActivity.ExtraData
-
-import androidx.core.content.ContextCompat.getSystemService
-import com.here.android.mpa.common.GeoCoordinate
-import com.here.android.mpa.common.MapSettings
-import java.io.File
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
     private val REQUEST_CODE_ASK_PERMISSIONS = 1
+    private var drawerLayout : DrawerLayout? = null
+    private var actionBarDrawerToggle : ActionBarDrawerToggle? = null
+    private var toolbar : Toolbar? = null
+    private var navigationView : NavigationView? = null
 
     /**
      * Permissions that need to be explicitly requested from end user.
@@ -40,8 +40,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         checkPermissions()
-        //setContentView(R.layout.activity_main)
-        //Navigator.navigateToMap(this)
     }
     protected fun checkPermissions() {
         val missingPermissions: MutableList<String> = ArrayList()
@@ -79,10 +77,33 @@ class MainActivity : AppCompatActivity() {
                     --index
                 }
                 // all permissions were granted
-                setContentView(R.layout.activity_main)
-                Navigator.navigateToMap(this)
-
+                initializeApp()
             }
         }
+    }
+
+    private fun initializeApp(){
+        setContentView(R.layout.activity_main)
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        drawerLayout = findViewById(R.id.root_container);
+        navigationView = findViewById(R.id.navigation_view)
+        navigationView?.setNavigationItemSelectedListener(this)
+        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
+        drawerLayout?.addDrawerListener(actionBarDrawerToggle!!)
+        actionBarDrawerToggle?.isDrawerIndicatorEnabled = true
+        actionBarDrawerToggle?.syncState()
+
+        Navigator.navigateToMap(this)
+
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        drawerLayout?.closeDrawer(GravityCompat.START)
+        when (item.itemId){
+            R.id.map -> Navigator.navigateToMap(this)
+            R.id.search -> Navigator.navigateToSearch(this)
+        }
+        return true
     }
 }
